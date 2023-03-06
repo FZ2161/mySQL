@@ -36,6 +36,19 @@ app.get('/select', (req, res)=>{
     })//zapytanie
 })
 
+app.get('/add/:imie/:nazwisko/:klasa', (req, res)=>{
+    const imie = req.params.imie
+    const nazwisko = req.params.nazwisko
+    const klasa = req.params.klasa
+
+    const sql = `INSERT INTO uczniowie (imie,nazwisko,klasa) VALUES ('${imie}', '${nazwisko}', '${klasa}')`
+    con.query(sql, (err, result, filds)=>{
+        if(err) console.log(err)
+        else res.send('dodano rekord')
+    })
+
+})
+
 app.listen(port, ()=>{
     console.log(`port: ${port}`)
 })
