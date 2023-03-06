@@ -16,7 +16,7 @@ var con = mysql.createConnection({
 
 con.connect(function(err) {
     if(err) console.log(err)
-    else console.log('connect with database')
+    else console.log('connected with database')
 })
 
 
@@ -24,6 +24,16 @@ app.get('/', (req, resss)=>{
 
     resss.send('Ok')
 
+})
+
+//pobranie danych z bazy
+app.get('/select', (req, res)=>{
+    const sql = 'SELECT * FROM uczniowie'
+    con.query(sql, function(err, result, fields){
+        if(err) console.log(err)
+        else res.send(result)
+
+    })//zapytanie
 })
 
 app.listen(port, ()=>{
